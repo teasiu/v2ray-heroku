@@ -1,0 +1,46 @@
+name: heroku-deploy-stop-start
+
+on:
+  workflow_dispatch:
+    branches:
+      - main
+    inputs:
+      actions:
+        description: "deploy/stop/start"
+        default: "deploy"
+
+jobs:
+  heroku-deploy:
+    if: ${{ github.event.inputs.actions == 'deploy' || github.event.inputs.actions == ''}}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.APP_NAME}} #Must be unique in Heroku
+          heroku_email: ${{secrets.EMAIL}}
+          usedocker: true
+          # docker_build_args: |
+          #   HD_UUID
+        env:
+          # 这是为了heroku，注意前缀有个HD，这是为了告诉heroku-deploy，这些变量需要传入到container 中。
+          HD_UUID: ${{ secrets.HEROKU_V2RAY_UUID }} # UUID for v2ray user, 为了安全，一定要放入github action token中
+          NODE_ENV: production
+          SECRET_KEY: ${{ secrets.MY_SECRET_KEY }}
+  stop-start:
+    if: ${{ github.event.inputs.actions  == 'start' || github.event.inputs.actions  == 'stop' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.APP_NAME}} #Must be unique in Heroku
+          heroku_email: ${{secrets.EMAIL}}
+          justlogin: true
+      - run: |
+          echo action is ${{ github.event.inputs.actions }}
+          if [[ ${{ github.event.inputs.actions }} == 'stop' ]]; then heroku ps:scale web=0 -a ${{secrets.APP_NAME}} && echo "stop"; fi
+          if [[ ${{ github.event.inputs.actions }} == 'start' ]]; then heroku ps:scale web=1 -a ${{secrets.APP_NAME}} && echo "start"; fi
+          heroku ps -a ${{secrets.APP_NAME}}

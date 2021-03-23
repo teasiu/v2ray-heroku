@@ -63,8 +63,6 @@ xxx@xxx:/mnt/c/Users/$ uuidgen
 项目Setting-->Secrets
 ```
 
-![Secrets](./readme-data/GithubSecrets.gif)
-
 ### Heroku API key
 
 路径
@@ -73,7 +71,6 @@ xxx@xxx:/mnt/c/Users/$ uuidgen
 heroku Account settings-->API key
 ```
 
-![Secrets](./readme-data/herokuapikey.gif)
 
 ### Github Actions 界面
 
@@ -81,24 +78,19 @@ heroku Account settings-->API key
 Actions
 ```
 
-![Actions](./readme-data/githubactions.gif)
-
 ### 重新部署
 
 点击 `Run workflow`, 输入 deploy。 然后就会重新 deploy。
 
-![deploy](./readme-data/deploy.jpg)
 
 ### 停止
 
 点击 `Run workflow`, 输入 stop。 然后就会 stop，不在计入小时数。
-![stop](./readme-data/stop.jpg)
 
 ### 启动
 
 点击 `Run workflow`, 输入 start。 然后就会启动。
 
-![start](./readme-data/start.jpg)
 
 ## 建立 cloudflare worker
 
@@ -151,7 +143,7 @@ https://github.com/badafans/better-cloudflare-ip
 
 ### QV2ray
 
-![QV2ray](/readme-data/QV2ray.jpg)
+
 
 别忘记开启 TLS。
-![QV2ray](/readme-data/QV2ray2.jpg)
+

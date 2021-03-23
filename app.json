@@ -7,7 +7,7 @@
     "env": {
         "UUID": {
             "description": "V2Ray UUID",
-            "value": "566eaf04-80bf-4217-a81c-f78e37a584e5"
+            "value": ""
         }
     },
     "website": "https://github.com/teasiu/v2ray-heroku",

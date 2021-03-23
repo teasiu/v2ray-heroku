@@ -1,4 +1,4 @@
-name: heroku-deploy-stop-start
+name: heroku125
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.APP_NAME}} #Must be unique in Heroku
+          heroku_app_name: ${{secrets.APP_NAME3}} #Must be unique in Heroku
           heroku_email: ${{secrets.EMAIL}}
           usedocker: true
           # docker_build_args: |
@@ -35,11 +35,11 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.APP_NAME}} #Must be unique in Heroku
+          heroku_app_name: ${{secrets.APP_NAME3}} #Must be unique in Heroku
           heroku_email: ${{secrets.EMAIL}}
           justlogin: true
       - run: |
           echo action is ${{ github.event.inputs.actions }}
-          if [[ ${{ github.event.inputs.actions }} == 'stop' ]]; then heroku ps:scale web=0 -a ${{secrets.APP_NAME}} && echo "stop"; fi
-          if [[ ${{ github.event.inputs.actions }} == 'start' ]]; then heroku ps:scale web=1 -a ${{secrets.APP_NAME}} && echo "start"; fi
-          heroku ps -a ${{secrets.APP_NAME}}
+          if [[ ${{ github.event.inputs.actions }} == 'stop' ]]; then heroku ps:scale web=0 -a ${{secrets.APP_NAME3}} && echo "stop"; fi
+          if [[ ${{ github.event.inputs.actions }} == 'start' ]]; then heroku ps:scale web=1 -a ${{secrets.APP_NAME3}} && echo "start"; fi
+          heroku ps -a ${{secrets.APP_NAME3}}

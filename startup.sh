@@ -39,7 +39,7 @@ cat << EOF > /etc/v2ray/config.json
                         "dest": 80
                     },
                     {
-                        "path": "/slitaz", // 必须换成自定义的 PATH
+                        "path": "/", // 必须换成自定义的 PATH
                         "dest": 1234,
                         "xver": 1
                     }
@@ -74,7 +74,7 @@ cat << EOF > /etc/v2ray/config.json
                 "security": "none",
                 "wsSettings": {
                     "acceptProxyProtocol": true, // 提醒：若你用 Nginx/Caddy 等反代 WS，需要删掉这行
-                    "path": "/slitaz" 
+                    "path": "/" 
                 }
             }
         }

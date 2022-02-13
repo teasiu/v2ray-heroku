@@ -2,25 +2,9 @@
 
 cat << EOF > /etc/v2ray/config.json
 {
-    "policy": {
-        "levels": {
-            "0": {
-                "handshake": 5,
-                "connIdle": 300,
-                "uplinkOnly": 2,
-                "downlinkOnly": 5,
-                "statsUserUplink": false,
-                "statsUserDownlink": false,
-                "bufferSize": 10240
-            }
-        },
-        "system": {
-            "statsInboundUplink": false,
-            "statsInboundDownlink": false,
-            "statsOutboundUplink": false,
-            "statsOutboundDownlink": false
-        }
-    },
+    "log": {
+        "loglevel": "warning"
+    }
     "inbounds": [
         {
             "port": $PORT,
@@ -73,7 +57,6 @@ cat << EOF > /etc/v2ray/config.json
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "acceptProxyProtocol": true, // 提醒：若你用 Nginx/Caddy 等反代 WS，需要删掉这行
                     "path": "/" 
                 }
             }
